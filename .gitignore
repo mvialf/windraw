@@ -1,0 +1,31 @@
+# Binarios compilados
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Directorio de salida de test
+*.out
+
+# Archivos de herramientas de profiling
+*.prof
+
+# Directorios de dependencias (si no usas m�dulos o por versiones antiguas)
+# vendor/
+
+# Archivos de configuraci�n espec�ficos del editor/IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de build local
+/build
+/dist
+
+.env
