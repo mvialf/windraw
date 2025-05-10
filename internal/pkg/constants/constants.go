@@ -18,20 +18,20 @@ const (
 )
 
 const (
-	PROFILE_TYPE_SLIDING_FRAME    = "Marco corredera"
-	PROFILE_TYPE_SLIDING_WIND     = "Hoja corredera"
-	PROFILE_TYPE_SLIDING_OVERLAP  = "Traslapo corredera"
-	PROFILE_TYPE_SLIDING_ADAPTER  = "Adaptador de hoja corredera"
-	PROFILE_TYPE_SLIDING_RAIL     = "Riel corredera"
-	PROFILE_TYPE_CASEMENT_FRAME   = "Marco fijo"
-	PROFILE_TYPE_CASEMENT_WIND_IN = "Hoja abatir interior"
-	PROFILE_TYPE_CASEMENT_WIND_OUT= "Hoja abatir exterior"
-	PROFILE_TYPE_CASEMENT_ADAPTER = "Adaptador de hoja abatir"
-	PROFILE_TYPE_MULLION          = "Montante"
-	PROFILE_TYPE_GLASSBEAD        = "Junquillo"
-	PROFILE_TYPE_JOINT            = "Unión"
-	PROFILE_TYPE_AUXILIAR         = "Perfil auxiliar"
-	PROFILE_TYPE_REINFORCEMENT    = "Refuerzo"
+	PROFILE_TYPE_SLIDING_FRAME     = "Marco corredera"
+	PROFILE_TYPE_SLIDING_WIND      = "Hoja corredera"
+	PROFILE_TYPE_SLIDING_OVERLAP   = "Traslapo corredera"
+	PROFILE_TYPE_SLIDING_ADAPTER   = "Adaptador de hoja corredera"
+	PROFILE_TYPE_SLIDING_RAIL      = "Riel corredera"
+	PROFILE_TYPE_CASEMENT_FRAME    = "Marco fijo"
+	PROFILE_TYPE_CASEMENT_WIND_IN  = "Hoja abatir interior"
+	PROFILE_TYPE_CASEMENT_WIND_OUT = "Hoja abatir exterior"
+	PROFILE_TYPE_CASEMENT_ADAPTER  = "Adaptador de hoja abatir"
+	PROFILE_TYPE_MULLION           = "Montante"
+	PROFILE_TYPE_GLASSBEAD         = "Junquillo"
+	PROFILE_TYPE_JOINT             = "Unión"
+	PROFILE_TYPE_AUXILIAR          = "Perfil auxiliar"
+	PROFILE_TYPE_REINFORCEMENT     = "Refuerzo"
 )
 
 const (
@@ -67,13 +67,13 @@ const (
 )
 
 const (
-	WIND_KIND_SLIDING_MOVIL   = "Hoja corredera móvil"
-	WIND_KIND_SLIDING_FIXED   = "Hoja corredera fija"
-	WIND_KIND_FIXED           = "Hoja fija"
-	WIND_KIND_CASEMENT        = "Hoja abatir"
-	WIND_KIND_PROJECTING      = "Hoja proyectante"
-	WIND_KIND_TILT_TURN       = "Hoja oscilobatiente"
-	WIND_KIND_TILT_ONLY       = "Hoja oscilante"
+	WIND_KIND_SLIDING_MOVIL = "Hoja corredera móvil"
+	WIND_KIND_SLIDING_FIXED = "Hoja corredera fija"
+	WIND_KIND_FIXED         = "Hoja fija"
+	WIND_KIND_CASEMENT      = "Hoja abatir"
+	WIND_KIND_PROJECTING    = "Hoja proyectante"
+	WIND_KIND_TILT_TURN     = "Hoja oscilobatiente"
+	WIND_KIND_TILT_ONLY     = "Hoja oscilante"
 )
 
 const (
@@ -89,6 +89,6 @@ const (
 )
 
 const (
-	OPENING_INTERIOR = "interior"
-	OPENING_EXTERIOR = "exterior"
+	OPENING_INT = "interior"
+	OPENING_EXT = "exterior"
 )

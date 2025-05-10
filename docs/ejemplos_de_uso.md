@@ -6,12 +6,12 @@ Este documento muestra cómo instanciar y utilizar las estructuras y funciones p
 
 ## Requisitos Previos
 
-Asegúrate de que tu `go.mod` esté inicializado correctamente (ej. `go mod init github.com/tu-usuario/tu-proyecto-ventanas`) y que los paquetes `models` y `constants` existan en las rutas:
+Asegúrate de que tu `go.mod` esté inicializado correctamente (ej. `go mod init github.com/mvialf/windraw`) y que los paquetes `models` y `constants` existan en las rutas:
 
-*   `github.com/tu-usuario/tu-proyecto-ventanas/internal/app/window-api/models`
-*   `github.com/tu-usuario/tu-proyecto-ventanas/internal/pkg/constants`
+*   `github.com/mvialf/windraw/internal/app/window-api/models`
+*   `github.com/mvialf/windraw/internal/pkg/constants`
 
-(Reemplaza `github.com/tu-usuario/tu-proyecto-ventanas` con el nombre real de tu módulo).
+(Reemplaza `github.com/mvialf/windraw` con el nombre real de tu módulo).
 
 ## Ejemplo Completo
 
@@ -23,8 +23,8 @@ package main
 import (
 	"fmt"
 	// Asegúrate de que la ruta de importación coincida con tu nombre de módulo
-	"github.com/tu-usuario/tu-proyecto-ventanas/internal/app/window-api/models"
-	"github.com/tu-usuario/tu-proyecto-ventanas/internal/pkg/constants"
+	"github.com/mvialf/windraw/internal/app/window-api/models"
+	"github.com/mvialf/windraw/internal/pkg/constants"
 )
 
 func main() {

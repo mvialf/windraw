@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	// Reemplaza 'github.com/tu-usuario/tu-proyecto-ventanas' con tu nombre de módulo
-	"github.com/tu-usuario/tu-proyecto-ventanas/internal/pkg/config"
+	// Usa el nombre de tu módulo Go aquí
+	"github.com/mvialf/windraw/internal/pkg/config"
 )
 
 // SupabaseClient encapsula la configuración para hacer llamadas a la API de Supabase.
@@ -46,10 +46,10 @@ func (c *SupabaseClient) QueryData(path string, queryParams string, target inter
 	}
 
 	// Cabeceras importantes para Supabase
-	req.Header.Set("apikey", c.ServiceRoleKey) // Usamos la service_role key como apikey
+	req.Header.Set("apikey", c.ServiceRoleKey)                  // Usamos la service_role key como apikey
 	req.Header.Set("Authorization", "Bearer "+c.ServiceRoleKey) // Y también como Bearer token
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Prefer", "return=representation") // Para que devuelva los datos en la respuesta
+	// req.Header.Set("Prefer", "return=representation") // Opcional para GET, más útil para POST/PATCH/PUT
 
 	resp, err := c.HttpClient.Do(req)
 	if err != nil {
@@ -58,36 +58,43 @@ func (c *SupabaseClient) QueryData(path string, queryParams string, target inter
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		bodyBytes, _ := io.ReadAll(resp.Body)
+		bodyBytes, _ := io.ReadAll(resp.Body) // Intenta leer el cuerpo del error
 		return fmt.Errorf("error de Supabase API (status %d): %s", resp.StatusCode, string(bodyBytes))
 	}
 
 	// Decodificar la respuesta JSON en la estructura 'target'
 	if err := json.NewDecoder(resp.Body).Decode(target); err != nil {
-		// Leer el cuerpo para depuración si falla el JSON
-		// Esto es útil porque a veces el error no es por el JSON sino por la respuesta vacía
-		// o un error previo que no se manejó.
-		bodyBytes, readErr := io.ReadAll(io.MultiReader(bytes.NewReader(getResetBody(resp)), resp.Body))
-		if readErr == nil && len(bodyBytes) > 0 {
-			fmt.Printf("Cuerpo de la respuesta (error JSON): %s\n", string(bodyBytes))
+		// Intenta leer el cuerpo si la decodificación JSON falla, para ver qué devolvió Supabase
+		// Necesitamos "resetear" el lector del cuerpo porque ya fue leído (o parcialmente leído) por NewDecoder
+		// Esta parte es para una mejor depuración.
+		// Primero, guardamos el cuerpo original para no perderlo.
+		originalBodyBytes, readErr := io.ReadAll(io.MultiReader(bytes.NewReader(getResetBody(resp)), resp.Body))
+		// MultiReader y getResetBody es un truco para intentar leer un cuerpo que ya pudo haber sido leído.
+
+		// Si la lectura del cuerpo original tuvo éxito y la decodificación JSON falló, muestra el cuerpo.
+		if readErr == nil && len(originalBodyBytes) > 0 {
+			fmt.Printf("Cuerpo de la respuesta (error JSON - status %d): %s\n", resp.StatusCode, string(originalBodyBytes))
 		}
-		return fmt.Errorf("error decodificando respuesta JSON: %w", err)
+		return fmt.Errorf("error decodificando respuesta JSON de Supabase: %w. Status: %d", err, resp.StatusCode)
 	}
 
 	return nil
 }
 
-// getResetBody es una función helper para poder leer el cuerpo de la respuesta múltiples veces
-// si es necesario para depuración, ya que resp.Body solo se puede leer una vez.
-// Esta función no es estrictamente necesaria para el funcionamiento básico.
+// getResetBody es una función auxiliar para intentar leer un http.Response.Body
+// que ya podría haber sido leído, guardándolo y reemplazándolo con un nuevo lector.
+// Esto es útil para depuración si json.NewDecoder falla.
 func getResetBody(resp *http.Response) []byte {
 	if resp == nil || resp.Body == nil {
 		return nil
 	}
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
+		// No podemos hacer mucho si hay un error leyendo el cuerpo aquí
 		return nil
 	}
-	resp.Body = io.NopCloser(bytes.NewBuffer(bodyBytes)) // "Resetea" el cuerpo
+	// "Reemplaza" el cuerpo original con un nuevo lector del mismo contenido
+	// para que pueda ser leído de nuevo si es necesario.
+	resp.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 	return bodyBytes
 }
