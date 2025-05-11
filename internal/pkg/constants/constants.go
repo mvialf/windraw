@@ -1,94 +1,76 @@
 package constants
 
+// General Application Constants
 const (
-	IVA_RATE = 19.0
+	IVA_RATE = 0.19 // Ejemplo de tasa de IVA
 )
 
+// Material Types (ejemplos, ajústalos)
 const (
 	MATERIAL_PVC      = "PVC"
-	MATERIAL_ALUMINIO = "Aluminio"
-	MATERIAL_CRISTAL  = "Cristal"
-	MATERIAL_MADERA   = "Madera"
-	MATERIAL_ACERO    = "Acero"
+	MATERIAL_ALUMINUM = "Aluminum"
+	MATERIAL_WOOD     = "Wood"
 )
 
+// Element Types / System Types (para ProfileSystem.Type)
 const (
 	TYPE_SLIDING  = "Sliding"
 	TYPE_CASEMENT = "Casement"
+	// TYPE_FIXED    = "Fixed" // Si tienes sistemas específicos para fijos
 )
 
+// Wind Kind Types (para models.Wind.Kind)
 const (
-	PROFILE_TYPE_SLIDING_FRAME     = "Marco corredera"
-	PROFILE_TYPE_SLIDING_WIND      = "Hoja corredera"
-	PROFILE_TYPE_SLIDING_OVERLAP   = "Traslapo corredera"
-	PROFILE_TYPE_SLIDING_ADAPTER   = "Adaptador de hoja corredera"
-	PROFILE_TYPE_SLIDING_RAIL      = "Riel corredera"
-	PROFILE_TYPE_CASEMENT_FRAME    = "Marco fijo"
-	PROFILE_TYPE_CASEMENT_WIND_IN  = "Hoja abatir interior"
-	PROFILE_TYPE_CASEMENT_WIND_OUT = "Hoja abatir exterior"
-	PROFILE_TYPE_CASEMENT_ADAPTER  = "Adaptador de hoja abatir"
-	PROFILE_TYPE_MULLION           = "Montante"
-	PROFILE_TYPE_GLASSBEAD         = "Junquillo"
-	PROFILE_TYPE_JOINT             = "Unión"
-	PROFILE_TYPE_AUXILIAR          = "Perfil auxiliar"
-	PROFILE_TYPE_REINFORCEMENT     = "Refuerzo"
+	KIND_SLIDING_WIND  = "Corredera" // Hoja corredera móvil
+	KIND_CASEMENT_WIND = "Abatible"  // Hoja abatible móvil
+	KIND_FIXED_PANE    = "Fijo"      // Paño fijo (puede estar modelado como un Wind)
+	// ... otros kinds ...
 )
 
+// Profile Types (ejemplos para `profiles.profile_type`)
+// Estos son más descriptivos del perfil en sí, no de su rol en un sistema.
 const (
-	STRUCTURE_VENTANA = "Ventana"
-	STRUCTURE_PUERTA  = "Puerta"
+	PROFILE_TYPE_SLIDING_FRAME   = "Marco Corredera"
+	PROFILE_TYPE_SLIDING_WIND    = "Hoja Corredera"
+	PROFILE_TYPE_CASEMENT_FRAME  = "Marco Abatible"
+	PROFILE_TYPE_CASEMENT_WIND   = "Hoja Abatible"
+	PROFILE_TYPE_MULLION         = "Montante"
+	PROFILE_TYPE_GLASSBEAD       = "Junquillo"
+	PROFILE_TYPE_REINFORCEMENT   = "Refuerzo"
+	PROFILE_TYPE_THRESHOLD       = "Umbral"
+	PROFILE_TYPE_TRACK_RAIL      = "Riel"
+	PROFILE_TYPE_ADAPTER         = "Adaptador"
+	PROFILE_TYPE_OVERLAP_PROFILE = "Perfil de Traslapo"
 )
 
+// Element Part Roles (para `system_profile_list.element_part_role`)
+// Define el rol funcional/posicional de un perfil en un sistema.
 const (
-	GEOMETRY_RECTANGULAR = "Rectangular"
-	GEOMETRY_TRIANGULAR  = "Triangular"
+	// --- Roles Genéricos ---
+	ROLE_GLASSBEAD_WIND  = "GLASSBEAD_WIND"
+	ROLE_GLASSBEAD_FRAME = "GLASSBEAD_FRAME"
+	ROLE_MULLION         = "MULLION"
+
+	// --- Roles para Sistemas Correderos (Sliding) ---
+	ROLE_FRAME_PERIMETER_TOP_SLIDING    = "FRAME_PERIMETER_TOP_SLIDING"
+	ROLE_FRAME_PERIMETER_BOTTOM_SLIDING = "FRAME_PERIMETER_BOTTOM_SLIDING"
+	ROLE_FRAME_PERIMETER_SIDE_SLIDING   = "FRAME_PERIMETER_SIDE_SLIDING"
+
+	ROLE_WIND_JAMB_SIDE_SLIDING    = "WIND_JAMB_SIDE_SLIDING"
+	ROLE_WIND_JAMB_MEETING_SLIDING = "WIND_JAMB_MEETING_SLIDING"
+	ROLE_WIND_RAIL_TOP_SLIDING     = "WIND_RAIL_TOP_SLIDING"
+	ROLE_WIND_RAIL_BOTTOM_SLIDING  = "WIND_RAIL_BOTTOM_SLIDING"
+
+	ROLE_WIND_VERTICAL_OVERLAP_SLIDING = "WIND_VERTICAL_OVERLAP_SLIDING" // Perfil de traslapo adicional
+
+	// --- (Roles para Casement y otros sistemas se añadirán después) ---
 )
 
+// Positions (para claves en Frame.Details y Wind.Details)
 const (
-	POSITION_LEFT   = "Izquierda"
-	POSITION_BOTTOM = "Abajo"
-	POSITION_RIGHT  = "Derecha"
-	POSITION_TOP    = "Arriba"
-)
-
-const (
-	CUT_SQUARE = "Cuadrado"
-	CUT_ANGLE  = "Ángulo"
-)
-
-const (
-	CUT_SQUARE_WIND             = "Cuadrado"
-	CUT_HORIZONTAL_WIND         = "Horizontal"
-	CUT_VERTICAL_WIND           = "Vertical"
-	CUT_ANGLE_WIND              = "Ángulo"
-	CUT_HORIZONTAL_OVERLAP_WIND = "Horizontal superpuesto"
-	CUT_VERTICAL_OVERLAP_WIND   = "Vertical superpuesto"
-	CUT_CUSTOM_WIND             = "Personalizado"
-)
-
-const (
-	WIND_KIND_SLIDING_MOVIL = "Hoja corredera móvil"
-	WIND_KIND_SLIDING_FIXED = "Hoja corredera fija"
-	WIND_KIND_FIXED         = "Hoja fija"
-	WIND_KIND_CASEMENT      = "Hoja abatir"
-	WIND_KIND_PROJECTING    = "Hoja proyectante"
-	WIND_KIND_TILT_TURN     = "Hoja oscilobatiente"
-	WIND_KIND_TILT_ONLY     = "Hoja oscilante"
-)
-
-const (
-	WIND_STATUS_ACTIVE   = "activa"
-	WIND_STATUS_INACTIVE = "inactiva"
-)
-
-const (
-	OPENING_SIDE_RIGHT  = "Derecha"
-	OPENING_SIDE_LEFT   = "Izquierda"
-	OPENING_SIDE_BOTTOM = "Abajo"
-	OPENING_SIDE_TOP    = "Arriba"
-)
-
-const (
-	OPENING_INT = "interior"
-	OPENING_EXT = "exterior"
+	POSITION_TOP    = "Top"
+	POSITION_BOTTOM = "Bottom"
+	POSITION_LEFT   = "Left"
+	POSITION_RIGHT  = "Right"
+	POSITION_MIDDLE = "Middle"
 )
